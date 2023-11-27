@@ -31,6 +31,7 @@
         "space-before-function-paren": "off",
         "no-undef": "off",
         "no-tabs": "warn",
+        "no-case-declarations": "off",
         "indent": [
             "warn",
             4,

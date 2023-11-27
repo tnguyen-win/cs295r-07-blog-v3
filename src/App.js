@@ -21,17 +21,16 @@ export default function App() {
     }, [fetchFeaturedPosts, fetchCategories]);
 
     return (
-        <>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path="user" element={user ? <EditUserProfile /> : <Navigate replace to={'/'} />} />
-                    <Route path="posts/:id" element={<Post />} />
-                    <Route path="posts/new" element={user ? <EditPost type='new' /> : <Navigate replace to={'/'} />} />
-                    <Route path="posts/edit/:id" element={user && location && location.state && user.id === location.state.userId ? <EditPost type='edit' /> : <Navigate replace to={'/'} />} />
-                    <Route path="*" element={<NoPage />} />
-                </Route>
-            </Routes>
-        </>
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="user" element={user ? <EditUserProfile /> : <Navigate replace to={'/'} />} />
+                {/* Perhaps this should redirect back to the homepage instead of displaying a custom error message, not sure */}
+                <Route path="posts/:id" element={<Post />} />
+                <Route path="posts/new" element={user ? <EditPost type='new' /> : <Navigate replace to={'/'} />} />
+                <Route path="posts/edit/:id" element={user && location && location.state && user.id === location.state.userId ? <EditPost type='edit' /> : <Navigate replace to={'/'} />} />
+                <Route path="*" element={<NoPage />} />
+            </Route>
+        </Routes>
     );
 }
