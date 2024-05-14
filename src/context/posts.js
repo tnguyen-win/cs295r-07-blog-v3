@@ -9,7 +9,7 @@ function Provider({ children }) {
     const [categories, setCategories] = useState([]);
     const [posts, setPosts] = useState([]);
     const fetchFeaturedPosts = useCallback(async () => {
-        const response = await axios.get(`${URL}/posts?_expand=user&_sort=datetime&_order=desc&_start=0&_end=12`);
+        const response = await axios.get(`${URL}/posts?_expand=user&_sort=datetime&_order=desc&_start=0&_end=6`);
 
         setFeaturedPosts(response.data);
     }, []);
