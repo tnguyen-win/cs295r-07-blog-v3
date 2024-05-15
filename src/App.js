@@ -2,6 +2,7 @@ import './App.css';
 import { useContext, useEffect } from 'react';
 import UserContext from './context/user';
 import PostsContext from './context/posts';
+import MetaTags from 'react-meta-tags';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -21,16 +22,21 @@ export default function App() {
     }, [fetchFeaturedPosts, fetchCategories]);
 
     return (
-        <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="user" element={user ? <EditUserProfile /> : <Navigate replace to={'/'} />} />
-                {/* Perhaps this should redirect back to the homepage instead of displaying a custom error message, not sure */}
-                <Route path="posts/:id" element={<Post />} />
-                <Route path="posts/new" element={user ? <EditPost type='new' /> : <Navigate replace to={'/'} />} />
-                <Route path="posts/edit/:id" element={user && location && location.state && user.id === location.state.userId ? <EditPost type='edit' /> : <Navigate replace to={'/'} />} />
-                <Route path="*" element={<NoPage />} />
-            </Route>
-        </Routes>
+        <>
+            <MetaTags>
+                <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+            </MetaTags>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="user" element={user ? <EditUserProfile /> : <Navigate replace to={'/'} />} />
+                    {/* Perhaps this should redirect back to the homepage instead of displaying a custom error message, not sure */}
+                    <Route path="posts/:id" element={<Post />} />
+                    <Route path="posts/new" element={user ? <EditPost type='new' /> : <Navigate replace to={'/'} />} />
+                    <Route path="posts/edit/:id" element={user && location && location.state && user.id === location.state.userId ? <EditPost type='edit' /> : <Navigate replace to={'/'} />} />
+                    <Route path="*" element={<NoPage />} />
+                </Route>
+            </Routes>
+        </>
     );
 }
