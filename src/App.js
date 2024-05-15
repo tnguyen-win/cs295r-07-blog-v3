@@ -2,7 +2,6 @@ import './App.css';
 import { useContext, useEffect } from 'react';
 import UserContext from './context/user';
 import PostsContext from './context/posts';
-import MetaTags from 'react-meta-tags';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -23,9 +22,6 @@ export default function App() {
 
     return (
         <>
-            <MetaTags>
-                <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-            </MetaTags>
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
